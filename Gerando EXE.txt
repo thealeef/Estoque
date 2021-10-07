@@ -1,3 +1,0 @@
-Abrir CMD no endereço da pasta 
-
-pyinstaller --noconsole --onefile -i Icon.ico Estoque_0.9.py
