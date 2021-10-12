@@ -5,6 +5,8 @@ from tkinter.messagebox import *
 import sqlite3 
 from tkinter import ttk
 from datetime import *
+import time
+
 
 def Login():
 
@@ -63,18 +65,18 @@ def Login():
                 break
 
     def Esqueceu():
-       
         app.destroy()
         Esqueceu_Senha()
 
     def Enter(event):
-
          Chama_Validando()
 
     app = Tk()
     altura = 175
     largura = 325
     app.resizable(0, 0)
+
+    app.iconbitmap('Icon.ico')
 
     largura_tela = app.winfo_screenwidth()
     altura_tela =  app.winfo_screenmmheight()
@@ -86,6 +88,7 @@ def Login():
     app.title('ESTOQUE')
 
     app.bind("<Return>", Enter)
+    app.bind('<Escape>', quit)
 
     titulo_label = Label(
         app,
@@ -143,10 +146,42 @@ def Login():
 
 def Esqueceu_Senha():
 
+    def Val_Email(email):
+
+        email = email.get()
+
+        teste = 0
+
+        for x in email:
+            
+            if x == '@':
+                teste += 1
+
+            if x == '.':
+                teste += 1
+   
+        if teste == 2:
+            showinfo(title=" ", message="Email Enviado!" )
+            
+        else:            
+            erro_label = Label(
+                text="**",
+                foreground='red',
+                width=2, height=1)
+            erro_label.place(x=300, y=39)    
+
+    def Chama_Botao():
+        Val_Email(email)
+
+    def Enter(event):
+        Val_Email(email)
+
     app = Tk()
     altura = 175
     largura = 325
     app.resizable(0, 0)
+
+    app.iconbitmap('Icon.ico')
 
     largura_tela = app.winfo_screenwidth()
     altura_tela =  app.winfo_screenmmheight()
@@ -156,6 +191,9 @@ def Esqueceu_Senha():
 
     app.geometry("%dx%d+%d+%d" % (largura, altura, posix,posiy))
     app.title('ESTOQUE')
+
+    app.bind("<Return>", Enter)
+    app.bind('<Escape>', quit)
 
     email_label = Label(
         width=16, height=1,
@@ -170,7 +208,8 @@ def Esqueceu_Senha():
         app,
         text="Enviar",
         width=10,
-        height=1)
+        height=1,
+        command=Chama_Botao)
     enviar_botao.place(x=120, y=100)
    
     app.mainloop()
@@ -190,6 +229,8 @@ def Painel_Controle():
     largura = 1000
     app.resizable(0, 0)
 
+    app.iconbitmap('Icon.ico')
+
     largura_tela = app.winfo_screenwidth()
     altura_tela =  app.winfo_screenmmheight()
 
@@ -198,6 +239,8 @@ def Painel_Controle():
 
     app.geometry("%dx%d+%d+%d" % (largura, altura, posix,posiy))
     app.title('ESTOQUE 0.1')
+
+    app.bind('<Escape>', quit)
     
     cadastrar_botao = Button(
         app,
@@ -262,11 +305,12 @@ def Cadastro():
             erro2_label.place(x=297, y=145)
 
     def Chama_Banco():
+        Banco_Dados(nome, usuario, senha, con_senha, email)
 
+    def Enter(event):
         Banco_Dados(nome, usuario, senha, con_senha, email)
 
     def Chama_Painel():
-
         app.destroy()
         Painel_Controle()
         
@@ -276,6 +320,8 @@ def Cadastro():
     largura = 325
     app.resizable(0, 0)
 
+    app.iconbitmap('Icon.ico')
+
     largura_tela = app.winfo_screenwidth()
     altura_tela =  app.winfo_screenmmheight()
 
@@ -284,6 +330,9 @@ def Cadastro():
 
     app.geometry("%dx%d+%d+%d" % (largura, altura, posix,posiy))
     app.title('ESTOQUE')
+
+    app.bind("<Return>", Enter)
+    app.bind('<Escape>', quit)
 
     titulo_label = Label(
         app,
@@ -440,6 +489,8 @@ def Cadastro_Itens():
     largura = 325
     app.resizable(0, 0)
 
+    app.iconbitmap('Icon.ico')
+
     largura_tela = app.winfo_screenwidth()
     altura_tela =  app.winfo_screenmmheight()
 
@@ -532,7 +583,5 @@ def Cadastro_Itens():
     
     app.mainloop()
 
-    
 
-
-Cadastro_Itens()
+Cadastro()
